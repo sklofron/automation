@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          name: Greeting
+          command: echo Hello, build.
+      - run:
+          name: Print the Current Time
+          command: date
+  test:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          name: Greeting
+          command: echo Hello, test.
+  uitest:
+    docker:
+      - image: debian:stretch
+    steps:
+      - checkout
+      - run:
+          name: Sleep
+          command: sleep 5
+      - run:
+          name: UITESTs
+          command: echo Hello, uitest.    
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+  ui-test:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: master
