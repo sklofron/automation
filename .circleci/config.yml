@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: circleci/ruby
     steps:
       - checkout
       - run:
@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Print the Current Time
           command: date
+      - run:
+          name: Print Env
+          command: ruby -e 'puts ENV["ARGUMENT"].inspect'
   test:
     docker:
       - image: debian:stretch
