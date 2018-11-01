@@ -13,7 +13,7 @@ jobs:
           command: date
       - run:
           name: Print Env
-          command: ruby -e 'puts ENV["ARGUMENT"].inspect'
+          command: ruby -e 'require \'base64\'; puts ENV["ARGUMENT"].inspect; puts Base64.decode64 ENV["ARGUMENT"]'
   test:
     docker:
       - image: debian:stretch
